@@ -3,6 +3,7 @@ import Shelf from './Shelf.js'
 
 class Main extends Component  {
   render() {
+    console.log(this.props.books);
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -10,7 +11,9 @@ class Main extends Component  {
         </div>
         <div className="list-books-content">
           <div>
-            <Shelf />
+            <Shelf name="Currently Reading" books={this.props.books.filter(book => book.shelf === "currentlyReading")} />
+            <Shelf name="Want to Read" books={this.props.books.filter(book => book.shelf === "wantToRead")} />
+            <Shelf name="Read" books={this.props.books.filter(book => book.shelf === "read")} />
           </div>
         </div>
         {/* Search Button */}
