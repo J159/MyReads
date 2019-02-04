@@ -8,7 +8,11 @@ class Main extends Component  {
         <div className="list-books-title">
           <h1>MyReads</h1>
         </div>
-        <Shelf />
+        <div className="list-books-content">
+          <div>
+            <Shelf />
+          </div>
+        </div>
         {/* Search Button */}
         <div className="open-search">
           <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
