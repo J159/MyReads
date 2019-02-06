@@ -22,10 +22,14 @@ class BooksApp extends React.Component {
     })
   }
 
+  bookTransfer(book, shelf) {
+    BooksAPI.update(book, shelf)
+  }
+
   render() {
     return (
       <div className="app">
-        <Main books={this.state.books} />
+        <Main books={this.state.books} bookTransfer={this.bookTransfer} />
       </div>
     )
   }
