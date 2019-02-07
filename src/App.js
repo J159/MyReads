@@ -3,6 +3,7 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Main from './Main.js'
 import Search from './Search.js'
+import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -22,8 +23,12 @@ class BooksApp extends React.Component {
     })
   }
 
-  bookTransfer(book, shelf) {
+  bookTransfer = (book, shelf) => {
     BooksAPI.update(book, shelf)
+    book.shelf = shelf;
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books })
+    })
   }
 
   render() {
@@ -35,4 +40,4 @@ class BooksApp extends React.Component {
   }
 }
 
-export default BooksApp
+export default BooksApp;
