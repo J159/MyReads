@@ -13,6 +13,16 @@ class Search extends Component {
     this.setState({ query })
   }
 
+  updateSearchResults = (query) => {
+    if (query) {
+      BooksAPI.search(query).then((searchResults) => {
+        this.setState({ searchResults })
+      })
+    } else {
+        this.setState({ searchResults: [] })
+    }
+  }
+
   render() {
     return (
       <div className="search-books">
