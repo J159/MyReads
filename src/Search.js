@@ -11,6 +11,7 @@ class Search extends Component {
 
   updateQuery = (query) => {
     this.setState({ query })
+    this.updateSearchResults(query);
   }
 
   updateSearchResults = (query) => {
@@ -43,7 +44,13 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+            {this.state.searchResults.map(searchResults => (
+              <li key={searchResults.id}>
+                <Book book={searchResults} />
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     )
