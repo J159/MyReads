@@ -4,7 +4,8 @@ import * as BooksAPI from './BooksAPI'
 
 class Search extends Component {
   state = {
-    query: ''
+    query: '',
+    searchResults: []
   }
 
   updateQuery = (query) => {
