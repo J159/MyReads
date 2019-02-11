@@ -10,8 +10,9 @@ class Search extends Component {
   }
 
   updateQuery = (query) => {
-    this.setState({ query })
-    this.updateSearchResults(query);
+    this.setState({ query }, () => {
+      this.updateSearchResults(query)
+    })
   }
 
   updateSearchResults = (query) => {
