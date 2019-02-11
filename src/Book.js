@@ -5,7 +5,7 @@ class Book extends Component {
     return (
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${this.props.book.imageLinks && this.props.book.imageLinks.thumbnail || "No Thumbnail"}")` }}></div>
+          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : "No Thumbnail"}")` }}></div>
           <div className="book-shelf-changer">
             <select onChange={(event) => this.props.bookTransfer(this.props.book, event.target.value)} value={this.props.book.shelf || 'none'}>
               <option value="move" disabled>Move to...</option>
