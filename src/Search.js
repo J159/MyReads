@@ -12,7 +12,7 @@ class Search extends Component {
   }
 
   updateQuery = (query) => {
-    // Set this.updateSearchResults within this.setState to occur synchronously
+    // this.updateSearchResults is set within this.setState to occur synchronously
     this.setState({ query }, () => {
       this.updateSearchResults(query)
     })
@@ -28,19 +28,25 @@ class Search extends Component {
     }
   }
 
+  // Update Search results with users query
   updateSearchResults = (query) => {
     if (query) {
       BooksAPI.search(query).then((searchResults) => {
-        if (searchResults.error) {
+        // if searchResults returns an error or query is empty, return an empty array for searchResults
+        if (searchResults.error || '') {
           return this.setState({ searchResults: [] })
+        // If searchResults is error-free, map through searchResults with this.updateBook method, then set to updatedSearchResults variable
         } else {
-           return this.setState({ searchResults })
+           let updatedSearchResults = searchResults.map(book => this.updateBook(book))
+           // Return searchResults which will equal updatedSearchResults
+           return this.setState({ searchResults: updatedSearchResults })
         }
       })
+      // else, searchResults returns empty array
     } else {
         this.setState({ searchResults: [] })
     }
-  }
+}
 
   render() {
     return (
@@ -48,16 +54,8 @@ class Search extends Component {
         <div className="search-books-bar">
           <Link to="/" className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
-            {/*
-              NOTES: The search from BooksAPI is limited to a particular set of search terms.
-              You can find these search terms here:
-              https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-              you don't find a specific author or title. Every search is limited by search terms.
-            */}
             {
-              /* The value of the query will change when user types into Search box. This information is then passed When the user types into Search box,
+              /* The value of query will change when user types into Search box. This information is passed to updateQuery
               */
             }
             <input type="text" placeholder="Search by title or author" value={this.state.query}
