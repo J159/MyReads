@@ -9,7 +9,7 @@ class BooksApp extends React.Component {
   state = {
     books: []
   }
-  
+
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
@@ -17,10 +17,11 @@ class BooksApp extends React.Component {
   }
 
   bookTransfer = (book, shelf) => {
-    BooksAPI.update(book, shelf)
-    book.shelf = shelf;
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books })
+    BooksAPI.update(book, shelf).then(() => {
+      book.shelf = shelf;
+      BooksAPI.getAll().then((books) => {
+        this.setState({ books })
+      })
     })
   }
 
